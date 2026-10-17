@@ -254,7 +254,6 @@ vendor/etc/media_codecs_mediatek_audio.xml
 vendor/etc/media_codecs_mediatek_video.xml
 vendor/etc/media_codecs_performance.xml
 vendor/etc/media_profiles_V1_0.xml
-vendor/etc/mixer_paths.xml
 vendor/etc/mtk_omx_core.cfg
 vendor/etc/partition_permission.sh
 vendor/etc/permissions/android.hardware.bluetooth.xml
