@@ -11,15 +11,70 @@ system image (GSI) can replace system.
 | --- | --- |
 | system | AOSP `android-10.0.0_r47`, unmodified |
 | kernel | [android_kernel_benesse_TAB-A04-BR3](https://github.com/mouseos/android_kernel_benesse_TAB-A04-BR3) (MT8167 BSP kernel-4.14 + TAB-A04-BR3 drivers) |
-| vendor binaries | MT8167 Android 10 BSP (MT8365_Q0_Ayla), `aiot8362am3_64_bsp` vendor build with the TAB-A04-BR3 MT6630 project values; listed in `proprietary-files.txt`, copied by `extract-files.sh` |
+| kernel binaries | `prebuilt/`: Image.gz-dtb and the MT6630 modules built from that repository (see `prebuilt/README.md`) |
+| vendor binaries | [android_vendor_benesse_a04br3](https://github.com/mouseos/android_vendor_benesse_a04br3): MT8167 Android 10 BSP (MT8365_Q0_Ayla), `aiot8362am3_64_bsp` vendor build with the TAB-A04-BR3 MT6630 project values; listed in `proprietary-files.txt`, copied by `extract-files.sh` |
 | /vendor/etc/init/hw, ueventd.rc, vintf | copied from that BSP vendor build, then adapted here |
 | sepolicy/vendor/mediatek, mt8167 | BSP `device/mediatek/sepolicy/{basic,bsp}/non_plat`, `device/mediatek/mt8167/sepolicy/{basic,bsp}` (vendor side only) |
 
 Partition sizes follow the GPT on the unit (factory removed, system 4112 MiB,
 vendor 1 GiB, cache 512 MiB). The boot image uses the stock LK layout
-(header v0, base 0x40000000, page 2048); the stock LK accepts images with or
-without the MediaTek mkimg headers.
+(header v0, base 0x40000000, page 2048). The stock boot.img also has the
+MediaTek mkimg headers on the kernel and ramdisk, the only layout the stock LK
+has been seen to boot; `tools/mtk_wrap_bootimg.py` adds them to the AOSP
+boot.img.
 
 Board differences handled here: no nvdata partition (NVRAM bind-mounted from
 /data/vendor/nvdata), the eMMC alias /dev/block/platform/bootdevice is created
 in init.project.rc, display 800x1280 rotated 270 (density 160).
+
+## Build
+
+AOSP `android-10.0.0_r47` is used as is; nothing in the AOSP tree is patched.
+
+```sh
+repo init -u https://android.googlesource.com/platform/manifest -b android-10.0.0_r47
+mkdir -p .repo/local_manifests
+# write .repo/local_manifests/a04br3.xml (below)
+repo sync -c -j8
+source build/envsetup.sh
+lunch aosp_a04br3-userdebug
+m bootimage systemimage vendorimage
+python3 device/benesse/a04br3/tools/mtk_wrap_bootimg.py "$OUT/boot.img" boot-a04br3.img
+```
+
+`.repo/local_manifests/a04br3.xml`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote name="mouseos" fetch="https://github.com/mouseos/" />
+  <project name="android_device_benesse_a04br3" path="device/benesse/a04br3" remote="mouseos" revision="main" />
+  <project name="android_vendor_benesse_a04br3" path="vendor/benesse/a04br3" remote="mouseos" revision="main" />
+  <!-- only needed to rebuild prebuilt/ -->
+  <project name="android_kernel_benesse_TAB-A04-BR3" path="kernel/benesse/a04br3" remote="mouseos" revision="main" />
+</manifest>
+```
+
+Host notes: the RenderScript clang of AOSP 10 needs `libncurses.so.5` and
+`libtinfo.so.5` (Debian/Ubuntu package `libncurses5`; otherwise put the copies
+in `prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/sysroot/usr/lib`
+on `LD_LIBRARY_PATH`). `SKIP_ABI_CHECKS=true` skips the VNDK ABI dumps, which
+only feed the ABI compatibility check.
+
+Rebuilding the kernel with the toolchains of the same AOSP tree (writes
+`prebuilt/`):
+
+```sh
+AOSP=$PWD kernel/benesse/a04br3/build-a04br3.sh device/benesse/a04br3
+```
+
+## Flash
+
+mtkclient writes raw images, so convert the sparse `system.img` and
+`vendor.img` with `simg2img` first. One BootROM connection:
+
+```sh
+mtk e boot,system,vendor,userdata,cache && mtk w boot,system,vendor boot-a04br3.img,system.raw.img,vendor.raw.img
+```
+
+userdata and cache are formatted by init on first boot (fstab: formattable).
