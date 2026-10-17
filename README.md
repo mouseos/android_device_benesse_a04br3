@@ -12,7 +12,7 @@ system image (GSI) can replace system.
 | system | AOSP `android-10.0.0_r47`, unmodified |
 | kernel | [android_kernel_benesse_TAB-A04-BR3](https://github.com/mouseos/android_kernel_benesse_TAB-A04-BR3) (MT8167 BSP kernel-4.14 + TAB-A04-BR3 drivers) |
 | kernel binaries | `prebuilt/`: Image.gz-dtb and the MT6630 modules built from that repository (see `prebuilt/README.md`) |
-| vendor binaries | [android_vendor_benesse_a04br3](https://github.com/mouseos/android_vendor_benesse_a04br3): MT8167 Android 10 BSP (MT8365_Q0_Ayla), `aiot8362am3_64_bsp` vendor build with the TAB-A04-BR3 MT6630 project values; listed in `proprietary-files.txt`, copied by `extract-files.sh` |. BSP project values for that build: MT6630 connectivity and `CUSTOM_KERNEL_ACCELEROMETER = yes` in `ProjectConfig.mk` (MMA8652 accelerometer in `sensors.mt8167.so`)
+| vendor binaries | [android_vendor_benesse_a04br3](https://github.com/mouseos/android_vendor_benesse_a04br3): MT8167 Android 10 BSP (MT8365_Q0_Ayla), `aiot8362am3_64_bsp` vendor build with the TAB-A04-BR3 MT6630 project values; listed in `proprietary-files.txt`, copied by `extract-files.sh`. BSP project values for that build: MT6630 connectivity and `CUSTOM_KERNEL_ACCELEROMETER = yes` in `ProjectConfig.mk` (MMA8652 accelerometer in `sensors.mt8167.so`) |
 | /vendor/etc/init/hw, ueventd.rc, vintf | copied from that BSP vendor build, then adapted here |
 | sepolicy/vendor/mediatek, mt8167 | BSP `device/mediatek/sepolicy/{basic,bsp}/non_plat`, `device/mediatek/mt8167/sepolicy/{basic,bsp}` (vendor side only) |
 
@@ -78,3 +78,4 @@ mtk e boot,system,vendor,userdata,cache && mtk w boot,system,vendor boot-a04br3.
 ```
 
 userdata and cache are formatted by init on first boot (fstab: formattable).
+
