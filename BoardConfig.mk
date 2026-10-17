@@ -24,8 +24,11 @@ BOARD_TAGS_OFFSET := 0x0e000000
 BOARD_KERNEL_PAGESIZE := 2048
 # The stock LK passes console=ttyMT0 (kernel-4.4 MTK UART driver); kernel-4.14
 # names the same UART ttyS0 (8250_mtk). The later console= wins.
+# The LK replaces the dtb bootargs with its own base line plus this cmdline, so
+# the dtb-only firmware_class.path and loop.max_part are repeated here.
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 console=ttyS0,921600n1 \
-    androidboot.selinux=permissive androidboot.boot_devices=soc/11120000.mmc
+    androidboot.selinux=permissive androidboot.boot_devices=soc/11120000.mmc \
+    firmware_class.path=/vendor/firmware loop.max_part=7
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) \
     --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET) \
     --header_version 0
