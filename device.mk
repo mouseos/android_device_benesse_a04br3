@@ -1,14 +1,17 @@
-DEVICE_PATH := device/benesse/TAB-A04-BR3
+DEVICE_PATH := device/benesse/a04br3
 
 $(call inherit-product, $(DEVICE_PATH)/vendor_props.mk)
-$(call inherit-product-if-exists, vendor/benesse/TAB-A04-BR3/TAB-A04-BR3-vendor.mk)
+$(call inherit-product-if-exists, vendor/benesse/a04br3/a04br3-vendor.mk)
 
 PRODUCT_SHIPPING_API_LEVEL := 24
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG := normal mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 
-# Kernel modules (build_kernel.sh: MT6630 connectivity)
+# Kernel (build_kernel.sh, kernel-4.14 repository) and its MT6630
+# connectivity modules; AOSP takes the boot image kernel from $(PRODUCT_OUT)/kernel
+PRODUCT_COPY_FILES += $(DEVICE_PATH)/prebuilt/Image.gz-dtb:kernel
+
 PRODUCT_COPY_FILES += \
     $(foreach m,$(wildcard $(DEVICE_PATH)/prebuilt/modules/*.ko),$(m):$(TARGET_COPY_OUT_VENDOR)/lib/modules/$(notdir $(m)))
 

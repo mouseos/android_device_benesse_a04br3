@@ -1,4 +1,4 @@
-DEVICE_PATH := device/benesse/TAB-A04-BR3
+DEVICE_PATH := device/benesse/a04br3
 
 # Architecture (MT8167, 4x Cortex-A35; the BSP builds for cortex-a53)
 TARGET_ARCH := arm64
@@ -17,7 +17,6 @@ TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
 # Kernel: build_kernel.sh output (kernel-4.14 repository), stock LK image layout
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz-dtb
 BOARD_KERNEL_BASE := 0x40000000
 BOARD_KERNEL_OFFSET := 0x00080000
 BOARD_RAMDISK_OFFSET := 0x04000000
@@ -76,4 +75,4 @@ BOARD_VENDOR_SEPOLICY_DIRS += \
 # Vendor blobs extracted from the BSP build (extract-files.sh)
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 BUILD_BROKEN_DUP_RULES := true
--include vendor/benesse/TAB-A04-BR3/BoardConfigVendor.mk
+-include vendor/benesse/a04br3/BoardConfigVendor.mk
