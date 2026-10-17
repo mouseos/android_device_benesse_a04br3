@@ -65,3 +65,6 @@
 #hang_detect
 /dev/RT_Monitor           0600   system     system
 /dev/kick_powerkey        0600   system     system
+
+# MediaTek sensors HAL (system) reads the dynamic sensor list
+/dev/sensorlist           0660   system     system
