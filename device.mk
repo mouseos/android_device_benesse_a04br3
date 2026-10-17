@@ -12,6 +12,12 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 # connectivity modules; AOSP takes the boot image kernel from $(PRODUCT_OUT)/kernel
 PRODUCT_COPY_FILES += $(DEVICE_PATH)/prebuilt/Image.gz-dtb:kernel
 
+# Keymaster: the BSP's MTEE keymaster 4.0 needs a TEE application that the
+# unit's stock (Android 7) TEE firmware does not have; it aborts with
+# "Could not Initialize for MTEEKeymaster 4.0 (-65526)". Use the AOSP
+# software keymaster 4.0 instead.
+PRODUCT_PACKAGES += android.hardware.keymaster@4.0-service
+
 PRODUCT_COPY_FILES += \
     $(foreach m,$(wildcard $(DEVICE_PATH)/prebuilt/modules/*.ko),$(m):$(TARGET_COPY_OUT_VENDOR)/lib/modules/$(notdir $(m)))
 
