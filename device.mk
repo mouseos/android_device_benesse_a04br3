@@ -23,6 +23,7 @@ PRODUCT_COPY_FILES += \
 
 # fstab for first-stage init and for mount_all
 PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/rootdir/init.recovery.mt8167.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.mt8167.rc \
     $(DEVICE_PATH)/rootdir/etc/fstab.mt8167:$(TARGET_COPY_OUT_RAMDISK)/fstab.mt8167 \
     $(DEVICE_PATH)/rootdir/etc/fstab.mt8167:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.mt8167
 

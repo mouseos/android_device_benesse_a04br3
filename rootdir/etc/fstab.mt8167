@@ -2,10 +2,13 @@
 # mount_all (/vendor/etc/fstab.mt8167). Partition names follow the GPT on the
 # unit: factory removed, system 4112 MiB, vendor 1 GiB, cache 512 MiB; there is
 # no nvdata, nvcfg, frp, vbmeta or dtbo partition.
+# userdata has no online discard, as in the BSP's Android 10 (kernel-4.14)
+# fstab: with it, /data got an invalid block bitmap on the unit and was
+# remounted read-only.
 # <src>                                                   <mnt_point>          <type> <mnt_flags>                                   <fs_mgr_flags>
 /dev/block/platform/soc/11120000.mmc/by-name/system       /system              ext4   ro                                            wait,first_stage_mount
 /dev/block/platform/soc/11120000.mmc/by-name/vendor       /vendor              ext4   ro                                            wait,first_stage_mount
-/dev/block/platform/soc/11120000.mmc/by-name/userdata     /data                ext4   noatime,nosuid,nodev,noauto_da_alloc,discard  wait,check,formattable,resize,reservedsize=128m
+/dev/block/platform/soc/11120000.mmc/by-name/userdata     /data                ext4   noatime,nosuid,nodev,noauto_da_alloc          wait,check,formattable,resize,reservedsize=128m
 /dev/block/platform/soc/11120000.mmc/by-name/cache        /cache               ext4   noatime,nosuid,nodev,noauto_da_alloc,discard  wait,check,formattable
 /dev/block/platform/soc/11120000.mmc/by-name/protect1     /mnt/vendor/protect_f ext4  noatime,nosuid,nodev,noauto_da_alloc,discard  wait,check,formattable
 /dev/block/platform/soc/11120000.mmc/by-name/protect2     /mnt/vendor/protect_s ext4  noatime,nosuid,nodev,noauto_da_alloc,discard  wait,check,formattable

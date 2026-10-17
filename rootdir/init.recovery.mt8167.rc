@@ -1,0 +1,9 @@
+# AOSP recovery: USB through configfs as in /vendor/etc/init/hw/init.mt8167.usb.rc,
+# display rotated like ro.sf.hwrotation=270, eMMC alias as in init.project.rc
+on init
+    setprop sys.usb.configfs 1
+    setprop sys.usb.controller "musb-hdrc"
+    setprop ro.minui.default_rotation ROTATION_LEFT
+
+on fs
+    symlink /dev/block/platform/soc/11120000.mmc /dev/block/platform/bootdevice
