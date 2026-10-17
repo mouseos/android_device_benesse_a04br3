@@ -12,9 +12,9 @@ Kernel release `4.14.141+`.
 Regenerate: `AOSP=<aosp top> kernel/benesse/a04br3/build-a04br3.sh device/benesse/a04br3`
 
 ```
-0d2ddcbb7ba8b5eed46f302a3684c60f6904cf93fa0377f1bd3b0573838cecdc  Image.gz-dtb
+0abf62cba865e333210f4b9bb882190378247faedaa21b3d38e3dfc81abbceb8  Image.gz-dtb
 5fae0dbcabce9afd99121fcbb6cf825dd8af82193ce452b87c74ed15dd02ff8c  modules/bt_drv.ko
-bbe88cda76ed8503d4b4f7ed966bbda5a58a51323e0b52dea08dd0ffb67ad2d1  modules/wlan_drv_gen3.ko
+89fc7c20731142fc3172c720a6b22dae9da7e6c273bfaf5effe19f10bcfa46e3  modules/wlan_drv_gen3.ko
 faff9fc4911298472d59d4ce8c4ec457a921ccb93fd8ed38f03700095f905b52  modules/wmt_chrdev_wifi.ko
 fb7b8caf264d85e87cde357b66597fc901d86f17fddbaeac370642c00ad79da9  modules/wmt_drv.ko
 ```
