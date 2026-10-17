@@ -22,8 +22,10 @@ BOARD_KERNEL_OFFSET := 0x00080000
 BOARD_RAMDISK_OFFSET := 0x04000000
 BOARD_TAGS_OFFSET := 0x0e000000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 androidboot.selinux=permissive \
-    androidboot.boot_devices=soc/11120000.mmc
+# The stock LK passes console=ttyMT0 (kernel-4.4 MTK UART driver); kernel-4.14
+# names the same UART ttyS0 (8250_mtk). The later console= wins.
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 console=ttyS0,921600n1 \
+    androidboot.selinux=permissive androidboot.boot_devices=soc/11120000.mmc
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) \
     --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET) \
     --header_version 0
