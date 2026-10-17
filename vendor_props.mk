@@ -1,6 +1,10 @@
 # Vendor properties of the BSP vendor (aiot8362am3_64_bsp build with the
 # TAB-A04-BR3 MT6630 project values), minus build, product, CPU and display
 # values that the device makefiles set.
+# ro.vendor.mtk_aal_support=0 (BSP: 1): the BSP's AAL service in the PQ HAL
+# has no license key for this unit ("AAL is not working: no License key") and
+# never applies the backlight it takes over from the kernel, so the screen
+# stayed dark after the first resume. Without AAL the kernel sets it directly.
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.omx_default_rank.sw-audio=7 \
     dalvik.vm.heapgrowthlimit=128m \
@@ -56,7 +60,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.mtk_ril_mode=c6m_1rild \
     ro.vendor.md_prop_ver=1 \
     ro.vendor.mtk_flight_mode_power_off_md=1 \
-    ro.vendor.mtk_aal_support=1 \
+    ro.vendor.mtk_aal_support=0 \
     ro.vendor.mtk_pq_support=2 \
     ro.vendor.mtk_pq_color_mode=1 \
     ro.vendor.mtk_miravision_support=1 \

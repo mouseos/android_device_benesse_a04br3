@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- framework-res overrides on top of the BSP's FrameworkResOverlay
+     (priority 1), see res/values/config.xml -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.benesse.a04br3.overlay.framework">
+    <overlay android:targetPackage="android"
+            android:priority="10"
+            android:isStatic="true"/>
+    <application android:hasCode="false"/>
+</manifest>

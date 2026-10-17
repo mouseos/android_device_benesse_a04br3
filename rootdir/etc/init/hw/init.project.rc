@@ -8,6 +8,12 @@ on init
     symlink /dev/block/platform/soc/11120000.mmc /dev/block/platform/bootdevice
     mount tmpfs tmpfs /storage/usbotg mode=0755,uid=1000,gid=1000
 
+on boot
+    # Resistive touch (BU21025) calibration, tslib-style (a0..a6, xres, yres).
+    # The stock firmware's ts_calibrator wrote it from /factory/calibration;
+    # these are the values of the unit's factory partition.
+    write /sys/module/bu21025/parameters/calibration 70262,-168,-2916712,-70,75135,-3223792,65536,1280,800
+
 on post-fs-data
     # No nvdata partition in this GPT: keep NVRAM on /data, where the stock
     # Android 7 firmware kept it (/data/nvram).
