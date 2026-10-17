@@ -1,0 +1,2 @@
+# TAB-A04-BR3: NVRAM kept on /data (no nvdata partition)
+/data/vendor/nvdata(/.*)?    u:object_r:nvdata_file:s0

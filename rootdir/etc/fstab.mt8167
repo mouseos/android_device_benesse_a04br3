@@ -1,0 +1,30 @@
+# TAB-A04-BR3 fstab, used by first-stage init (boot ramdisk) and by
+# mount_all (/vendor/etc/fstab.mt8167). Partition names follow the GPT on the
+# unit: factory removed, system 4112 MiB, vendor 1 GiB, cache 512 MiB; there is
+# no nvdata, nvcfg, frp, vbmeta or dtbo partition.
+# <src>                                                   <mnt_point>          <type> <mnt_flags>                                   <fs_mgr_flags>
+/dev/block/platform/soc/11120000.mmc/by-name/system       /system              ext4   ro                                            wait,first_stage_mount
+/dev/block/platform/soc/11120000.mmc/by-name/vendor       /vendor              ext4   ro                                            wait,first_stage_mount
+/dev/block/platform/soc/11120000.mmc/by-name/userdata     /data                ext4   noatime,nosuid,nodev,noauto_da_alloc,discard  wait,check,formattable,resize,reservedsize=128m
+/dev/block/platform/soc/11120000.mmc/by-name/cache        /cache               ext4   noatime,nosuid,nodev,noauto_da_alloc,discard  wait,check,formattable
+/dev/block/platform/soc/11120000.mmc/by-name/protect1     /mnt/vendor/protect_f ext4  noatime,nosuid,nodev,noauto_da_alloc,discard  wait,check,formattable
+/dev/block/platform/soc/11120000.mmc/by-name/protect2     /mnt/vendor/protect_s ext4  noatime,nosuid,nodev,noauto_da_alloc,discard  wait,check,formattable
+/dev/block/platform/soc/11120000.mmc/by-name/persist      /mnt/vendor/persist  ext4   noatime,nosuid,nodev,noauto_da_alloc,discard  wait,check,formattable
+
+/devices/platform/soc/11130000.mmc*                       auto                 auto   defaults                                      voldmanaged=sdcard1:auto,encryptable=userdata
+/devices/platform/soc/11100000.usb*                       auto                 auto   defaults                                      voldmanaged=usbotg:auto,encryptable=userdata
+
+/dev/block/platform/soc/11120000.mmc/by-name/nvram        /nvram               emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/proinfo      /proinfo             emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/lk           /bootloader          emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/lk2          /bootloader2         emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/para         /misc                emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/boot         /boot                emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/recovery     /recovery            emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/logo         /logo                emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/expdb        /expdb               emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/seccfg       /seccfg              emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/tee1         /tee1                emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/tee2         /tee2                emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/kb           /kb                  emmc   defaults                                      defaults
+/dev/block/platform/soc/11120000.mmc/by-name/dkb          /dkb                 emmc   defaults                                      defaults
