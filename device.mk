@@ -18,6 +18,13 @@ PRODUCT_COPY_FILES += $(DEVICE_PATH)/prebuilt/Image.gz-dtb:kernel
 # software keymaster 4.0 instead.
 PRODUCT_PACKAGES += android.hardware.keymaster@4.0-service
 
+# RescueParty skips userdebug builds only while USB is active, and it reads
+# that from /sys/class/android_usb, which does not exist with configfs USB:
+# while bringing the port up, keep it from sending the unit to recovery.
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.disable_rescue=true
+endif
+
 PRODUCT_COPY_FILES += \
     $(foreach m,$(wildcard $(DEVICE_PATH)/prebuilt/modules/*.ko),$(m):$(TARGET_COPY_OUT_VENDOR)/lib/modules/$(notdir $(m)))
 

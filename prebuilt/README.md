@@ -2,7 +2,7 @@
 
 Built by `build-a04br3.sh` of
 [android_kernel_benesse_TAB-A04-BR3](https://github.com/mouseos/android_kernel_benesse_TAB-A04-BR3)
-at commit 431fb19, `a04br3_defconfig`, with the
+at commit 66a62e8, `a04br3_defconfig`, with the
 AOSP android-10.0.0_r47 toolchains (clang-r353983c, aarch64-linux-android-4.9).
 Kernel release `4.14.141+`.
 
