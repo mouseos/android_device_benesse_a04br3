@@ -65,7 +65,14 @@ TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 
 # SELinux: vendor policy of the BSP (non_plat parts only, so the system side
 # stays AOSP and a GSI keeps working)
+# The BSP non_plat policy refers to types that MediaTek declares in its
+# system-side plat_public. The system here is plain AOSP, so those
+# declarations come with the vendor policy, and neverallow checks (only
+# allowed to be skipped on userdebug/eng) are not enforced at build time.
+SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_VENDOR_SEPOLICY_DIRS += \
+    $(DEVICE_PATH)/sepolicy/vendor/mediatek/basic/plat_public \
+    $(DEVICE_PATH)/sepolicy/vendor/mediatek/bsp/plat_public \
     $(DEVICE_PATH)/sepolicy/vendor/mediatek/basic/non_plat \
     $(DEVICE_PATH)/sepolicy/vendor/mediatek/bsp/non_plat \
     $(DEVICE_PATH)/sepolicy/vendor/mt8167/basic \
