@@ -59,6 +59,9 @@ TARGET_USES_HWC2 := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 
+# Audio: the BSP vendor ships audio_policy_configuration.xml
+USE_XML_AUDIO_POLICY_CONF := 1
+
 # Wi-Fi: MT6630 through WMT. wpa_supplicant, hostapd, libwifi-hal and the
 # Wi-Fi HAL come prebuilt from the BSP vendor (proprietary-files.txt), so
 # BOARD_WLAN_DEVICE stays unset and AOSP does not rebuild them.
