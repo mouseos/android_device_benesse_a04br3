@@ -1815,6 +1815,8 @@ const CAMERA_TSF_TBL_STRUCT CAMERA_TSF_DEFAULT_VALUE =
 #include INCLUDE_FILENAME_TSF_DATA
 };
 
+#include "stock_tuning_hi556mipiraw.h"
+
 
 typedef NSFeature::RAWSensorInfo<SENSOR_ID> SensorInfoSingleton_T;
 
@@ -1822,6 +1824,7 @@ typedef NSFeature::RAWSensorInfo<SENSOR_ID> SensorInfoSingleton_T;
 namespace NSFeature {
 template <>
 UINT32
+
 SensorInfoSingleton_T::
 impGetDefaultData(CAMERA_DATA_TYPE_ENUM const CameraDataType, VOID*const pDataBuf, UINT32 const size) const
 {
@@ -1840,19 +1843,19 @@ impGetDefaultData(CAMERA_DATA_TYPE_ENUM const CameraDataType, VOID*const pDataBu
     switch(CameraDataType)
     {
         case CAMERA_NVRAM_DATA_ISP:
-            memcpy(pDataBuf,&CAMERA_ISP_DEFAULT_VALUE,sizeof(NVRAM_CAMERA_ISP_PARAM_STRUCT));
+            memcpy(pDataBuf,kStockHi556Isp,sizeof(NVRAM_CAMERA_ISP_PARAM_STRUCT));
             break;
         case CAMERA_NVRAM_DATA_3A:
-            memcpy(pDataBuf,&CAMERA_3A_NVRAM_DEFAULT_VALUE,sizeof(NVRAM_CAMERA_3A_STRUCT));
+            memcpy(pDataBuf,kStockHi5563A,sizeof(NVRAM_CAMERA_3A_STRUCT));
             break;
         case CAMERA_NVRAM_DATA_SHADING:
-            memcpy(pDataBuf,&CAMERA_SHADING_DEFAULT_VALUE,sizeof(NVRAM_CAMERA_SHADING_STRUCT));
+            memcpy(pDataBuf,kStockHi556Shading,sizeof(NVRAM_CAMERA_SHADING_STRUCT));
             break;
         case CAMERA_DATA_AE_PLINETABLE:
             memcpy(pDataBuf,&g_PlineTableMapping,sizeof(AE_PLINETABLE_T));
             break;
         case CAMERA_DATA_TSF_TABLE:
-            memcpy(pDataBuf,&CAMERA_TSF_DEFAULT_VALUE,sizeof(CAMERA_TSF_TBL_STRUCT));
+            memcpy(pDataBuf,kStockHi556Tsf,sizeof(CAMERA_TSF_TBL_STRUCT));
             break;
         default:
             return 1;

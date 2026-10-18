@@ -8,6 +8,9 @@ before building the vendor blobs that extract-files.sh copies.
 - custom/mt8167/hal/imgsensor{,_metadata}/hi556_mipi_raw: HI556 HAL tuning and
   static metadata, derived from the BSP ov5675_mipi_raw (also 2592x1944 RAW),
   color filter GBRG (kernel driver outputs RAW_Gb)
+- custom/mt8167/hal/imgsensor/hi556_mipi_raw/stock_tuning_hi556mipiraw.h: ISP, 3A, shading and TSF defaults
+  of the stock firmware (Android 7 libcameracustom.so, RAWSensorInfo<0x556>),
+  used by camera_tuning_para_hi556mipiraw.cpp; same structure sizes as this HAL
 - custom/mt8167/hal/imgsensor_src/sensorlist.cpp: HI556 entry
 
 Build in the BSP: m camerahalserver sensors.mt8167 libcameracustom ... then
