@@ -71,12 +71,18 @@ AOSP=$PWD kernel/benesse/a04br3/build-a04br3.sh device/benesse/a04br3
 
 ## Flash
 
-mtkclient writes raw images, so convert the sparse `system.img` and
-`vendor.img` with `simg2img` first. One BootROM connection:
+Prebuilt images: https://github.com/mouseos/android_device_benesse_a04br3/releases
+(`gpt.bin`, boot, recovery, system, vendor).
+
+The GPT differs from the stock one (factory removed, system 4112 MiB, vendor
+1 GiB, cache 512 MiB, eMMC of 30535680 sectors). With mtkclient, write the GPT
+first, reconnect, then the partitions. mtkclient writes raw images, so convert
+a sparse `system.img`/`vendor.img` with `simg2img` first.
 
 ```sh
-mtk e boot,recovery,system,vendor,userdata,cache && mtk w boot,recovery,system,vendor boot-a04br3.img,recovery-a04br3.img,system.raw.img,vendor.raw.img
+mtk w gpt gpt.bin
+mtk e userdata,cache
+mtk w boot,recovery,system,vendor boot-a04br3.img,recovery-a04br3.img,system.raw.img,vendor.raw.img
 ```
 
 userdata and cache are formatted by init on first boot (fstab: formattable).
-
