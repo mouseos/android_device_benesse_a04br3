@@ -38,8 +38,9 @@ mkdir -p .repo/local_manifests
 repo sync -c -j8
 source build/envsetup.sh
 lunch aosp_a04br3-userdebug
-m bootimage systemimage vendorimage
+m bootimage recoveryimage systemimage vendorimage
 python3 device/benesse/a04br3/tools/mtk_wrap_bootimg.py "$OUT/boot.img" boot-a04br3.img
+python3 device/benesse/a04br3/tools/mtk_wrap_bootimg.py "$OUT/recovery.img" recovery-a04br3.img
 ```
 
 `.repo/local_manifests/a04br3.xml`:
@@ -74,7 +75,7 @@ mtkclient writes raw images, so convert the sparse `system.img` and
 `vendor.img` with `simg2img` first. One BootROM connection:
 
 ```sh
-mtk e boot,system,vendor,userdata,cache && mtk w boot,system,vendor boot-a04br3.img,system.raw.img,vendor.raw.img
+mtk e boot,recovery,system,vendor,userdata,cache && mtk w boot,recovery,system,vendor boot-a04br3.img,recovery-a04br3.img,system.raw.img,vendor.raw.img
 ```
 
 userdata and cache are formatted by init on first boot (fstab: formattable).
