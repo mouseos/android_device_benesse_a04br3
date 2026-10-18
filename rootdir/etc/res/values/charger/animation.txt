@@ -1,0 +1,11 @@
+# AOSP default charger animation (system/core/healthd), read from /product:
+# first-stage init switches root to the system image, so the ramdisk /res
+# copies are not visible in power-off charging mode.
+animation: 3 2 charger/battery_scale
+fail: charger/battery_fail
+frame: 750 0 19
+frame: 750 0 39
+frame: 750 0 59
+frame: 750 0 79
+frame: 750 80 95
+frame: 750 0 100

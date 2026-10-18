@@ -23,6 +23,10 @@ PRODUCT_PACKAGES += A04br3FrameworkOverlay
 
 # Power-off charging animation (AOSP charger)
 PRODUCT_PACKAGES += charger_res_images
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/rootdir/etc/res/values/charger/animation.txt:$(TARGET_COPY_OUT_PRODUCT)/etc/res/values/charger/animation.txt \
+    system/core/healthd/images/battery_scale.png:$(TARGET_COPY_OUT_PRODUCT)/etc/res/images/charger/battery_scale.png \
+    system/core/healthd/images/battery_fail.png:$(TARGET_COPY_OUT_PRODUCT)/etc/res/images/charger/battery_fail.png
 
 # RescueParty skips userdebug builds only while USB is active, and it reads
 # that from /sys/class/android_usb, which does not exist with configfs USB:
