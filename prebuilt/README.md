@@ -2,7 +2,7 @@
 
 Built by `build-a04br3.sh` of
 [android_kernel_benesse_TAB-A04-BR3](https://github.com/mouseos/android_kernel_benesse_TAB-A04-BR3)
-at commit 461ec39, `a04br3_defconfig`, with the
+at commit 5418f70, `a04br3_defconfig`, with the
 AOSP android-10.0.0_r47 toolchains (clang-r353983c, aarch64-linux-android-4.9).
 Kernel release `4.14.141+`.
 
@@ -12,9 +12,9 @@ Kernel release `4.14.141+`.
 Regenerate: `AOSP=<aosp top> kernel/benesse/a04br3/build-a04br3.sh device/benesse/a04br3`
 
 ```
-b69b8bc61ce8e01d8cb3308a4ce6208b3e55257e42221892dbba3541740e7c1a  Image.gz-dtb
+1ddc0f1cba2de8d3ecc6ee7e511bfc2cadbed82f07fa4cf7862ca1e1cf6f2358  Image.gz-dtb
 5fae0dbcabce9afd99121fcbb6cf825dd8af82193ce452b87c74ed15dd02ff8c  modules/bt_drv.ko
-f902e131af2da3aa9af5c2c295569bc8eea58da3e199e62dd50c11f9073213f5  modules/wlan_drv_gen3.ko
+2df280cfa0315def588b769913307cfc8879ec2f2e9c45ea83c30b587c2bdd8e  modules/wlan_drv_gen3.ko
 faff9fc4911298472d59d4ce8c4ec457a921ccb93fd8ed38f03700095f905b52  modules/wmt_chrdev_wifi.ko
 fb7b8caf264d85e87cde357b66597fc901d86f17fddbaeac370642c00ad79da9  modules/wmt_drv.ko
 ```
