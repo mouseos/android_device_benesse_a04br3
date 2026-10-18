@@ -21,6 +21,9 @@ PRODUCT_PACKAGES += android.hardware.keymaster@4.0-service
 # framework-res overrides (overlay-rro/A04br3FrameworkOverlay)
 PRODUCT_PACKAGES += A04br3FrameworkOverlay
 
+# Power-off charging animation (AOSP charger)
+PRODUCT_PACKAGES += charger_res_images
+
 # RescueParty skips userdebug builds only while USB is active, and it reads
 # that from /sys/class/android_usb, which does not exist with configfs USB:
 # while bringing the port up, keep it from sending the unit to recovery.

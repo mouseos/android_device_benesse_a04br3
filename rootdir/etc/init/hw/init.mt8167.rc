@@ -63,8 +63,6 @@ on init
 
 on charger
     symlink /dev/block/platform/soc/11120000.mmc /dev/block/platform/bootdevice
-    # mount ext4 /dev/block/platform/bootdevice/by-name/system /system ro wait
-    mount ext4 /dev/block/mntlblk_d1  /system ro wait
     # Permissions for System Server and daemons.
     chown system system /sys/power/autosleep
     chown system system /sys/power/state
@@ -75,7 +73,6 @@ on charger
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
     chmod 0660 /sys/power/wakeup_count
-    start kpoc_charger
 
     chown system system /sys/class/leds/lcd-backlight/brightness
     chown system system /sys/class/leds/red/brightness
@@ -772,3 +769,12 @@ service XoSetCap /vendor/bin/XoSetCap
 
 on property:vendor.service.nvram_init=Ready
     start XoSetCap
+
+# Power-off charging (stock LK boot mode 8; the kernel adds androidboot.mode=charger).
+# AOSP charger draws the battery animation from /res/images/charger.
+service charger /system/bin/charger
+    class charger
+    user system
+    group system graphics input
+    capabilities SYS_BOOT BLOCK_SUSPEND
+    seclabel u:r:charger:s0
