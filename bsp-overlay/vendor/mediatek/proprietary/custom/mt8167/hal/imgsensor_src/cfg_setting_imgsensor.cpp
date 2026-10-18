@@ -46,7 +46,7 @@ getSensorOrientation()
 {
     static SensorOrientation_T const inst = {
         u4Degree_0  : 0,   //  main sensor in degree (0, 90, 180, 270)
-        u4Degree_1  : 0,    //  sub  sensor in degree (0, 90, 180, 270)
+        u4Degree_1  : 180,    //  sub  sensor in degree (0, 90, 180, 270)
         u4Degree_2  : 0,   //  main2 sensor in degree (0, 90, 180, 270)
     };
     return inst;

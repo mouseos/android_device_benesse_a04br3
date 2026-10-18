@@ -57,3 +57,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=160 \
     ro.sf.hwrotation=270 \
     ro.surface_flinger.primary_display_orientation=ORIENTATION_270
+
+# Vulkan: the PowerVR GE8300 driver (vulkan.mt8167) reports API 1.1; the stock
+# firmware declared the Vulkan features too.
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml
