@@ -12,6 +12,8 @@ before building the vendor blobs that extract-files.sh copies.
   of the stock firmware (Android 7 libcameracustom.so, RAWSensorInfo<0x556>),
   used by camera_tuning_para_hi556mipiraw.cpp; same structure sizes as this HAL
 - custom/mt8167/hal/imgsensor_src/sensorlist.cpp: HI556 entry
+- custom/mt8167/hal/imgsensor_src/cfg_setting_imgsensor.cpp and the HI556 metadata: sensor
+  orientation 0 for both cameras (the unit is landscape-native, ro.sf.hwrotation=270)
 
 Build in the BSP: m camerahalserver sensors.mt8167 libcameracustom ... then
 device/benesse/a04br3/extract-files.sh <BSP out/target/product/aiot8362am3_64_bsp>
