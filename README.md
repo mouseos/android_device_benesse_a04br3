@@ -109,3 +109,5 @@ This trial used SELinux Permissive; the existing NVRAM warning remains.
 See [LineageOS17.1 results and MTK fastboot procedure](tools/gsi-unmodified/LINEAGE17.md).
 
 Newer distributed GSI observations are in [Android 11+ trials](tools/gsi-unmodified/NEWER-ANDROID.md).
+
+Distributed OEM UI trials (Nippon, Erfan and Mystic) are recorded in [OEM UI results](tools/gsi-unmodified/OEM-UI.md); the earlier [MIUI13 trial](tools/gsi-unmodified/MIUI13.md) is recorded separately.
