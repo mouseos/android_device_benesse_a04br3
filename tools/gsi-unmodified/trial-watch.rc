@@ -7,5 +7,13 @@ service gsi_trial_watch /system/bin/sh -c "sleep 240; setprop sys.powerctl reboo
     disabled
     oneshot
 
+service gsi_trial_capture /system/bin/sh -c "sleep 60; getprop > /data/local/tmp/gsi-trial-properties.txt; screencap -p /data/local/tmp/gsi-trial-screen.png; logcat -d -b all > /data/local/tmp/gsi-trial-logcat.txt; sleep 120; getprop > /data/local/tmp/gsi-trial-properties-final.txt; screencap -p /data/local/tmp/gsi-trial-screen-final.png"
+    user root
+    group root shell log graphics
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
 on init
     start gsi_trial_watch
+    start gsi_trial_capture
