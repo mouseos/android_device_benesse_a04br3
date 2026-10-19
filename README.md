@@ -107,3 +107,5 @@ and was left installed after a second successful reboot. Home, Settings,
 Wi-Fi scanning, Bluetooth power-on and live camera preview were observed.
 This trial used SELinux Permissive; the existing NVRAM warning remains.
 See [LineageOS17.1 results and MTK fastboot procedure](tools/gsi-unmodified/LINEAGE17.md).
+
+Newer distributed GSI observations are in [Android 11+ trials](tools/gsi-unmodified/NEWER-ANDROID.md).
