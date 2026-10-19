@@ -40,3 +40,11 @@ failed before init. Main commit90c264a fixes it to RECOVERY. The corrected
 image was verified by actual recovery menu display and ADB root control;
 the user also confirmed the screen works. Release v1.0 was replaced and
 the downloaded recovery and checksum manifest were verified.
+
+When decompressing a transported image directly onto a partition, use
+lz4 --no-sparse -d -f staged.img.lz4 /dev/block/by-name/system.
+Default sparse output seeks over zero ranges instead of overwriting old
+blocks. The default-output trial failed raw SHA verification; explicit
+--no-sparse produced exactly the distributed SHA above. A transfer or
+decompression command returning success is not sufficient. Fail before
+reboot on any mismatch; use strict subprocess checks or set -e.
