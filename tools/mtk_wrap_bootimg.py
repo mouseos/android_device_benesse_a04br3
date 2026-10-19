@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Give the kernel and ramdisk of an AOSP v0 boot.img the 512-byte MediaTek
-mkimg headers (KERNEL / ROOTFS) that the stock TAB-A04-BR3 boot.img has.
+mkimg headers (KERNEL / ROOTFS for boot, KERNEL / RECOVERY for recovery).
 
   mtk_wrap_bootimg.py <out>/boot.img <flashable boot.img>
 
@@ -27,6 +27,7 @@ def pad(data: bytes, page: int) -> bytes:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
+    ap.add_argument("--recovery", action="store_true", help="Use the stock RECOVERY ramdisk section name")
     ap.add_argument("input", type=Path)
     ap.add_argument("output", type=Path)
     args = ap.parse_args()
@@ -42,7 +43,8 @@ def main() -> None:
         if struct.unpack_from("<I", data)[0] == MAGIC:
             raise SystemExit(f"{kind} already has an MTK header")
     kernel = mtk_header(b"KERNEL", len(kernel)) + kernel
-    ramdisk = mtk_header(b"ROOTFS", len(ramdisk)) + ramdisk
+    ramdisk_name = b"RECOVERY" if args.recovery or args.input.name == "recovery.img" else b"ROOTFS"
+    ramdisk = mtk_header(ramdisk_name, len(ramdisk)) + ramdisk
     hdr = bytearray(img[:page])
     struct.pack_into("<I", hdr, 8, len(kernel))
     struct.pack_into("<I", hdr, 16, len(ramdisk))

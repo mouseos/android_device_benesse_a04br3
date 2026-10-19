@@ -40,7 +40,7 @@ source build/envsetup.sh
 lunch aosp_a04br3-userdebug
 m bootimage recoveryimage systemimage vendorimage
 python3 device/benesse/a04br3/tools/mtk_wrap_bootimg.py "$OUT/boot.img" boot-a04br3.img
-python3 device/benesse/a04br3/tools/mtk_wrap_bootimg.py "$OUT/recovery.img" recovery-a04br3.img
+python3 device/benesse/a04br3/tools/mtk_wrap_bootimg.py --recovery "$OUT/recovery.img" recovery-a04br3.img
 ```
 
 `.repo/local_manifests/a04br3.xml`:
