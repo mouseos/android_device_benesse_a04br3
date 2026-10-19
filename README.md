@@ -4,6 +4,9 @@ MediaTek MT8167, stock Android 7.0. Values of the stock firmware:
 brand `benesse`, manufacturer `STS-TOTTORI`, device/name/board
 `TAB-A04-BR3`, model `TAB-A03-BR3`.
 
+This device tree corrects the stock model-name typo to `TAB-A04-BR3` in
+both the AOSP product and its generated vendor product properties.
+
 The goal is a Treble vendor plus a pristine AOSP 10 system, so that a generic
 system image (GSI) can replace system.
 
@@ -111,3 +114,5 @@ See [LineageOS17.1 results and MTK fastboot procedure](tools/gsi-unmodified/LINE
 Newer distributed GSI observations are in [Android 11+ trials](tools/gsi-unmodified/NEWER-ANDROID.md).
 
 Distributed OEM UI trials (Nippon, Erfan and Mystic) are recorded in [OEM UI results](tools/gsi-unmodified/OEM-UI.md); the earlier [MIUI13 trial](tools/gsi-unmodified/MIUI13.md) is recorded separately.
+
+The requested [RestlessOS Android17 trial](tools/gsi-unmodified/RESTLESS17.md) reached ADB but failed framework boot with ashmem access denials.
