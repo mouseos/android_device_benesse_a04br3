@@ -1,0 +1,11 @@
+# Temporary test harness, never part of the GSI or normal vendor product.
+# The shell domain and powerctl permission exist in production AOSP policy.
+service gsi_trial_watch /system/bin/sh -c "sleep 240; setprop sys.powerctl reboot,recovery"
+    user root
+    group root shell
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+on init
+    start gsi_trial_watch
