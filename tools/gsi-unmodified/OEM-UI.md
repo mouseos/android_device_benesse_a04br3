@@ -120,3 +120,29 @@ working OEM UI boot and user-confirmed display result, not complete feature
 compatibility. No Mi account or find-device function was tested. No permanent
 kernel/vendor/device adaptation was needed for the retained image; the only
 persistent display adjustment is in userdata and will be lost on data wipe.
+
+## Japanese setup and setup-completion workaround
+
+After the user requested Japanese initial setup, persist.sys.locale=ja-JP was
+saved and the device rebooted. The initial setup welcome screen rendered
+Japanese, while the 160-dpi override persisted. The user later passed the update
+check but reported being unable to proceed from Google Services.
+
+Google Services was the foreground activity. Logs included Google-process
+WRITE_DEVICE_CONFIG permission denials; those observations alone do not prove
+the sole cause of the stuck screen. Starting the wizard's exit activity from
+normal ADB was rejected because the activity is not exported.
+
+Recovery root was used to back up and edit userdata only: device_provisioned=1
+and user_setup_complete=1, plus user-0 disabled state for
+com.google.android.setupwizard. The written XML was read back and matched.
+Google consent choices, accounts, GMS APKs and the GSI were not edited.
+After normal reboot, MIUI Home (com.miui.home/.launcher.Launcher) resumed and
+rendered. Japanese locale and the 160-dpi override persisted. This skips the
+blocked setup stage; it does not repair Google Services' privileged permissions.
+
+Wi-Fi was connected and Android marked the network VALIDATED. After boot
+finished, ICMP to 1.1.1.1 succeeded 2/2 and DNS resolution plus ICMP to example.com
+succeeded 1/1. An earlier ping during boot had no network yet; that transient
+result is retained separately. Google sign-in, Play certification and all Google
+service functions remain unverified.
