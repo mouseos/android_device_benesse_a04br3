@@ -101,3 +101,9 @@ Enforcing; Settings interaction, Wi-Fi scan, Bluetooth power-on and two
 camera service devices were observed. This is not a complete hardware
 certification. The NVRAM invalid-MAC warning also occurs on the normal AOSP
 and remains an existing board-data issue. See [device trial results](tools/gsi-unmodified/RESULTS.md).
+
+The distributed Andy Yan LineageOS17.1 ARM64 system-as-root GSI also booted
+and was left installed after a second successful reboot. Home, Settings,
+Wi-Fi scanning, Bluetooth power-on and live camera preview were observed.
+This trial used SELinux Permissive; the existing NVRAM warning remains.
+See [LineageOS17.1 results and MTK fastboot procedure](tools/gsi-unmodified/LINEAGE17.md).
