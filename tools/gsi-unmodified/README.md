@@ -20,7 +20,7 @@ A static ARM64 lz4 CLI built from unmodified external/lz4 in AOSP r47 may
 compress the backup stream without requiring software inside the GSI.
 
 Use the released USB-fixed v1.0 recovery (SHA256
-4caa7b7f0c9a3fa3c4d0143aecb9b8196798749b990a5680d34aea1a12c0c0f8).
+0b42e8b9fb24e0bbba369bb8d8e813c884d49a9c045fc4944f07ef30365a6da2).
 Validate recovery USB/root control before replacing system.
 trial-watch.rc is a TEMPORARY vendor test harness. It launches the standard
 shell domain, then requests reboot,recovery after 240 seconds; it edits
@@ -34,3 +34,9 @@ Append all mtkclient/flash output to port/gsi/logs/flash.log.
 Evaluate actual boot completion, display/input and required vendor services;
 static compatibility checks alone are insufficient. If incompatible, retain
 the evidence and restore the normal AOSP rather than editing the GSI.
+
+The original recovery package used ROOTFS for its MTK ramdisk header and
+failed before init. Main commit90c264a fixes it to RECOVERY. The corrected
+image was verified by actual recovery menu display and ADB root control;
+the user also confirmed the screen works. Release v1.0 was replaced and
+the downloaded recovery and checksum manifest were verified.
