@@ -6,6 +6,12 @@ brand `benesse`, manufacturer `STS-TOTTORI`, device/name/board
 
 This device tree corrects the stock model-name typo to `TAB-A04-BR3` in
 both the AOSP product and its generated vendor product properties.
+The corrected AOSP10 images were verified on the device: Settings shows
+`TAB-A04-BR3`, the same model survives a normal reboot, and the updated recovery
+provides ADB/root access and returns to normal boot. This build uses the public
+PSI kernel #19 and its four matching connectivity modules. Bluetooth power-on
+and two camera devices were observed; this check does not repeat the complete
+hardware test suite.
 
 The goal is a Treble vendor plus a pristine AOSP 10 system, so that a generic
 system image (GSI) can replace system.
