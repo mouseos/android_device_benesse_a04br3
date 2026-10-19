@@ -86,3 +86,18 @@ mtk w boot,recovery,system,vendor boot-a04br3.img,recovery-a04br3.img,system.raw
 ```
 
 userdata and cache are formatted by init on first boot (fstab: formattable).
+
+## GSI compatibility policy and device result
+
+Distributed GSI images must remain byte-for-byte unmodified: no filesystem,
+property, signature or AVB/footer edits. AOSP and the reference BSP also
+remain unpatched. Device adaptation belongs in the public device/vendor/kernel
+repositories. Do not use the old locally modified GSI preparation workflow.
+
+The official Android10 arm64 user image QJR1.191112.001/6004257 was tested
+with SHA256 18a42a793798294183089e582c56bdf666e9d493523fb4389c6a3f7101ec6b60
+verified on the actual written bytes before boot. It booted with SELinux
+Enforcing; Settings interaction, Wi-Fi scan, Bluetooth power-on and two
+camera service devices were observed. This is not a complete hardware
+certification. The NVRAM invalid-MAC warning also occurs on the normal AOSP
+and remains an existing board-data issue. See [device trial results](tools/gsi-unmodified/RESULTS.md).
