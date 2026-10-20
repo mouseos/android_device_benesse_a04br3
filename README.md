@@ -81,7 +81,7 @@ AOSP=$PWD kernel/benesse/a04br3/build-a04br3.sh device/benesse/a04br3
 ## Flash
 
 Prebuilt images: https://github.com/mouseos/android_device_benesse_a04br3/releases
-(`gpt.bin`, boot, recovery, system, vendor).
+(`gpt.bin`, boot, recovery, system, vendor, `logo.bin`).
 
 The GPT differs from the stock one (factory removed, system 4112 MiB, vendor
 1 GiB, cache 512 MiB, eMMC of 30535680 sectors). With mtkclient, write the GPT
@@ -91,10 +91,16 @@ a sparse `system.img`/`vendor.img` with `simg2img` first.
 ```sh
 mtk w gpt gpt.bin
 mtk e userdata,cache
-mtk w boot,recovery,system,vendor boot-a04br3.img,recovery-a04br3.img,system.raw.img,vendor.raw.img
+mtk w boot,recovery,system,vendor,logo boot-a04br3.img,recovery-a04br3.img,system.raw.img,vendor.raw.img,logo.bin
 ```
 
 userdata and cache are formatted by init on first boot (fstab: formattable).
+
+To replace only the boot logo, download `logo.bin` and run `mtk w logo logo.bin`.
+This does not require changing the GPT or erasing userdata/cache.
+The SmileTabLabo logo uses the supplied 1280x800 BMP with identical RGB pixels;
+the other 38 logo resources are preserved.
+
 
 ## GSI compatibility policy and device result
 
